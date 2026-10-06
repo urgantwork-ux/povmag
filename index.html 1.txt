@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>POVMAGA — Modern Guest Post & Blogging Platform</title>
+
+<meta name="description" content="POVMAGA is a modern guest post blogging platform for publishing useful stories, insights, technology, business and lifestyle content.">
+
+<style>
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter, Arial, Helvetica, sans-serif;
+    background:#070b14;
+    color:#f5f7ff;
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input,
+textarea{
+    font-family:inherit;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(7,11,20,.78);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar{
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:#7c5cff;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.nav-links a{
+    color:#c9cedc;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.nav-actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.theme-btn,
+.menu-btn{
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.menu-btn{
+    display:none;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:13px 21px;
+    border-radius:12px;
+    border:1px solid transparent;
+    font-weight:800;
+    font-size:14px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#7c5cff,#a56cff);
+    color:#fff;
+    box-shadow:0 10px 30px rgba(124,92,255,.25);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(124,92,255,.38);
+}
+
+.btn-outline{
+    border-color:rgba(255,255,255,.15);
+    background:rgba(255,255,255,.04);
+    color:#fff;
+}
+
+.btn-outline:hover{
+    background:rgba(255,255,255,.09);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:760px;
+    padding-top:170px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:550px;
+    height:550px;
+    border-radius:50%;
+    background:#5d35ff;
+    filter:blur(150px);
+    opacity:.18;
+    top:80px;
+    left:-220px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:#00d4ff;
+    filter:blur(150px);
+    opacity:.12;
+    right:-180px;
+    bottom:0;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:70px;
+    align-items:center;
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 13px;
+    border:1px solid rgba(124,92,255,.3);
+    border-radius:30px;
+    background:rgba(124,92,255,.08);
+    color:#c8bdff;
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:22px;
+}
+
+.badge i{
+    width:7px;
+    height:7px;
+    background:#8dffb2;
+    border-radius:50%;
+    box-shadow:0 0 12px #8dffb2;
+}
+
+.hero h1{
+    font-size:clamp(48px,6vw,78px);
+    line-height:1;
+    letter-spacing:-4px;
+    max-width:760px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#8f73ff,#d28bff,#61ddff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    margin:25px 0 32px;
+    max-width:650px;
+    color:#aab1c2;
+    font-size:18px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+/* Hero Visual */
+
+.hero-visual{
+    position:relative;
+    min-height:470px;
+}
+
+.glass-card{
+    position:absolute;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.055);
+    backdrop-filter:blur(20px);
+    border-radius:25px;
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+}
+
+.main-card{
+    width:360px;
+    padding:24px;
+    top:35px;
+    left:30px;
+    transform:rotate(-5deg);
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#7c5cff,#5bdcff);
+}
+
+.mini-label{
+    color:#8f98ad;
+    font-size:12px;
+}
+
+.main-card h3{
+    font-size:23px;
+    line-height:1.25;
+    margin-bottom:13px;
+}
+
+.fake-image{
+    height:145px;
+    border-radius:17px;
+    background:
+    linear-gradient(135deg,rgba(124,92,255,.8),rgba(22,217,255,.45)),
+    radial-gradient(circle at 30% 30%,#fff,transparent 25%);
+    margin-bottom:17px;
+}
+
+.stats-card{
+    width:230px;
+    padding:22px;
+    right:0;
+    bottom:40px;
+}
+
+.stats-card strong{
+    font-size:36px;
+    display:block;
+}
+
+.stats-card small{
+    color:#9da5b8;
+}
+
+.float-card{
+    width:180px;
+    padding:18px;
+    right:25px;
+    top:0;
+    animation:float 4s ease-in-out infinite;
+}
+
+.float-card strong{
+    display:block;
+    font-size:25px;
+}
+
+.float-card small{
+    color:#9da5b8;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+/* =========================
+   TRUST
+========================= */
+
+.trust{
+    padding:30px 0 70px;
+}
+
+.trust-box{
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    padding:25px 0;
+    display:flex;
+    justify-content:space-between;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.trust-box span{
+    color:#697185;
+    font-weight:800;
+    letter-spacing:1px;
+    font-size:13px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+    padding:95px 0;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:30px;
+    margin-bottom:42px;
+}
+
+.section-head h2{
+    font-size:42px;
+    line-height:1.1;
+    letter-spacing:-2px;
+}
+
+.section-head p{
+    color:#8e97aa;
+    max-width:500px;
+}
+
+/* =========================
+   CATEGORY
+========================= */
+
+.categories{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:35px;
+}
+
+.category{
+    padding:10px 16px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.035);
+    color:#aeb5c5;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.category:hover,
+.category.active{
+    background:#7c5cff;
+    border-color:#7c5cff;
+    color:#fff;
+}
+
+/* =========================
+   BLOG CARDS
+========================= */
+
+.blog-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:23px;
+}
+
+.blog-card{
+    border:1px solid rgba(255,255,255,.09);
+    background:#0c1220;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.blog-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(124,92,255,.4);
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.blog-image{
+    height:210px;
+    background:linear-gradient(135deg,#292050,#142a40);
+    position:relative;
+    overflow:hidden;
+}
+
+.blog-image::before{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:#7c5cff;
+    filter:blur(40px);
+    opacity:.5;
+    top:-50px;
+    right:-30px;
+}
+
+.blog-image::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:#00d9ff;
+    filter:blur(35px);
+    opacity:.35;
+    bottom:-40px;
+    left:20px;
+}
+
+.blog-content{
+    padding:22px;
+}
+
+.blog-tag{
+    color:#a88cff;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:10px;
+    font-weight:900;
+}
+
+.blog-card h3{
+    font-size:21px;
+    line-height:1.3;
+    margin:9px 0 12px;
+}
+
+.blog-card p{
+    color:#8992a6;
+    font-size:14px;
+}
+
+.blog-meta{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.07);
+    color:#687185;
+    font-size:12px;
+}
+
+/* =========================
+   FEATURE SECTION
+========================= */
+
+.feature{
+    background:linear-gradient(180deg,#090e19,#0a0e18);
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:55px;
+    align-items:center;
+}
+
+.feature-visual{
+    min-height:470px;
+    border-radius:30px;
+    position:relative;
+    overflow:hidden;
+    background:
+    linear-gradient(135deg,rgba(124,92,255,.3),rgba(0,212,255,.12)),
+    #101727;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.feature-visual .orb{
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:#805eff;
+    filter:blur(70px);
+    opacity:.5;
+    top:70px;
+    left:100px;
+}
+
+.feature-window{
+    position:absolute;
+    width:78%;
+    height:70%;
+    top:15%;
+    left:11%;
+    border-radius:18px;
+    background:rgba(10,14,25,.75);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(15px);
+    padding:20px;
+    box-shadow:0 30px 70px rgba(0,0,0,.4);
+}
+
+.window-bar{
+    display:flex;
+    gap:6px;
+    margin-bottom:25px;
+}
+
+.window-bar i{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#5d6575;
+}
+
+.window-line{
+    height:12px;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    margin:13px 0;
+}
+
+.window-line.short{
+    width:60%;
+}
+
+.feature-copy h2{
+    font-size:45px;
+    line-height:1.1;
+    letter-spacing:-2px;
+    margin-bottom:20px;
+}
+
+.feature-copy p{
+    color:#929bad;
+    margin-bottom:25px;
+}
+
+.feature-list{
+    list-style:none;
+    margin-bottom:30px;
+}
+
+.feature-list li{
+    margin:13px 0;
+    color:#c4cad6;
+}
+
+.feature-list li::before{
+    content:"✓";
+    color:#8dffb2;
+    margin-right:12px;
+    font-weight:900;
+}
+
+/* =========================
+   WHY POVMAGA
+========================= */
+
+.cards-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.info-card{
+    padding:30px;
+    border-radius:20px;
+    background:#0c1220;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.icon{
+    width:50px;
+    height:50px;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    background:rgba(124,92,255,.12);
+    color:#a58dff;
+    font-size:22px;
+    margin-bottom:22px;
+}
+
+.info-card h3{
+    margin-bottom:10px;
+}
+
+.info-card p{
+    color:#8790a3;
+    font-size:14px;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+    padding:40px 0 100px;
+}
+
+.cta-box{
+    position:relative;
+    overflow:hidden;
+    padding:65px;
+    border-radius:30px;
+    background:
+    radial-gradient(circle at 85% 20%,rgba(0,212,255,.2),transparent 30%),
+    radial-gradient(circle at 20% 90%,rgba(124,92,255,.25),transparent 35%),
+    #101729;
+    border:1px solid rgba(255,255,255,.1);
+    text-align:center;
+}
+
+.cta-box h2{
+    font-size:46px;
+    letter-spacing:-2px;
+    margin-bottom:15px;
+}
+
+.cta-box p{
+    color:#939bad;
+    max-width:650px;
+    margin:0 auto 28px;
+}
+
+/* =========================
+   NEWSLETTER
+========================= */
+
+.newsletter{
+    padding-top:30px;
+}
+
+.newsletter-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+    padding:30px;
+    border-radius:22px;
+    background:#0c1220;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.newsletter h3{
+    font-size:25px;
+}
+
+.newsletter p{
+    color:#858ea2;
+    font-size:14px;
+}
+
+.newsletter-form{
+    display:flex;
+    gap:8px;
+}
+
+.newsletter-form input{
+    width:250px;
+    padding:14px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.1);
+    outline:none;
+    background:#070b14;
+    color:#fff;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:70px 0 25px;
+    border-top:1px solid rgba(255,255,255,.07);
+    margin-top:60px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-brand p{
+    color:#7e8799;
+    font-size:14px;
+    margin-top:15px;
+    max-width:330px;
+}
+
+.footer-col h4{
+    margin-bottom:18px;
+}
+
+.footer-col a{
+    display:block;
+    color:#7e8799;
+    font-size:14px;
+    margin:10px 0;
+}
+
+.footer-col a:hover{
+    color:#fff;
+}
+
+.copyright{
+    border-top:1px solid rgba(255,255,255,.07);
+    margin-top:50px;
+    padding-top:22px;
+    color:#656e80;
+    font-size:12px;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(600px,100%);
+    background:#0d1423;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:22px;
+    padding:30px;
+    position:relative;
+}
+
+.modal-close{
+    position:absolute;
+    right:20px;
+    top:18px;
+    border:0;
+    background:none;
+    color:#fff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-box h2{
+    margin-bottom:7px;
+}
+
+.modal-box > p{
+    color:#858ea1;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group label{
+    display:block;
+    font-size:12px;
+    color:#a9b0bf;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:13px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.1);
+    background:#080d17;
+    color:#fff;
+    outline:none;
+}
+
+.form-group textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+/* =========================
+   LIGHT MODE
+========================= */
+
+body.light{
+    background:#f6f7fb;
+    color:#10131d;
+}
+
+body.light header{
+    background:rgba(255,255,255,.82);
+    border-color:#e5e7ee;
+}
+
+body.light .nav-links a{
+    color:#555c6b;
+}
+
+body.light .theme-btn,
+body.light .menu-btn{
+    color:#111;
+    border-color:#ddd;
+    background:#fff;
+}
+
+body.light .hero p,
+body.light .section-head p,
+body.light .feature-copy p{
+    color:#667085;
+}
+
+body.light .trust-box{
+    border-color:#e5e7ee;
+}
+
+body.light .trust-box span{
+    color:#98a0af;
+}
+
+body.light .category,
+body.light .btn-outline{
+    background:#fff;
+    color:#303643;
+    border-color:#e0e3ea;
+}
+
+body.light .blog-card,
+body.light .info-card,
+body.light .newsletter-box,
+body.light .modal-box{
+    background:#fff;
+    border-color:#e4e6ec;
+}
+
+body.light .blog-card p,
+body.light .info-card p,
+body.light .newsletter p{
+    color:#687182;
+}
+
+body.light .blog-meta{
+    border-color:#eceef2;
+}
+
+body.light .feature{
+    background:#eef0f7;
+}
+
+body.light .feature-visual{
+    background:#e2e5f0;
+}
+
+body.light footer{
+    border-color:#e5e7ee;
+}
+
+body.light .footer-brand p,
+body.light .footer-col a{
+    color:#687182;
+}
+
+body.light .copyright{
+    border-color:#e5e7ee;
+}
+
+body.light .form-group input,
+body.light .form-group textarea,
+body.light .form-group select,
+body.light .newsletter-form input{
+    background:#f7f8fa;
+    color:#111;
+    border-color:#ddd;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:950px){
+
+    .nav-links{
+        position:absolute;
+        top:76px;
+        left:0;
+        width:100%;
+        background:#0b101b;
+        padding:25px;
+        display:none;
+        flex-direction:column;
+        align-items:flex-start;
+        border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    body.light .nav-links{
+        background:#fff;
+    }
+
+    .nav-links.open{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-grid,
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding-top:130px;
+    }
+
+    .hero-visual{
+        max-width:600px;
+        width:100%;
+        margin:auto;
+    }
+
+    .blog-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .cards-3{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .newsletter-box{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .navbar{
+        height:68px;
+    }
+
+    .logo{
+        font-size:24px;
+    }
+
+    .nav-actions .btn{
+        display:none;
+    }
+
+    .hero{
+        min-height:auto;
+        padding-top:115px;
+        padding-bottom:70px;
+    }
+
+    .hero h1{
+        font-size:48px;
+        letter-spacing:-2px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .hero-visual{
+        min-height:390px;
+    }
+
+    .main-card{
+        width:290px;
+        left:5px;
+    }
+
+    .stats-card{
+        width:180px;
+        right:0;
+    }
+
+    .float-card{
+        right:0;
+        width:150px;
+    }
+
+    .section-head{
+        display:block;
+    }
+
+    .section-head h2{
+        font-size:34px;
+        margin-bottom:12px;
+    }
+
+    .blog-grid{
+        grid-template-columns:1fr;
+    }
+
+    .feature-copy h2{
+        font-size:36px;
+    }
+
+    .cta-box{
+        padding:40px 22px;
+    }
+
+    .cta-box h2{
+        font-size:34px;
+    }
+
+    .newsletter-form{
+        width:100%;
+        flex-direction:column;
+    }
+
+    .newsletter-form input{
+        width:100%;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .copyright{
+        flex-direction:column;
+        gap:8px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+    <div class="container navbar">
+
+        <a href="#" class="logo">
+            POV<span>MAGA</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#articles">Articles</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="theme-btn" id="themeBtn" aria-label="Change theme">
+                ☀
+            </button>
+
+            <button class="btn btn-primary" id="openModal">
+                Submit Guest Post
+            </button>
+
+            <button class="menu-btn" id="menuBtn">
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<main>
+
+<section class="hero" id="home">
+
+    <div class="container hero-grid">
+
+        <div>
+
+            <div class="badge">
+                <i></i>
+                OPEN FOR GUEST CONTRIBUTORS
+            </div>
+
+            <h1>
+                Ideas worth
+                <span class="gradient-text">publishing.</span>
+            </h1>
+
+            <p>
+                POVMAGA is a modern guest-post and blogging platform
+                where creators, writers and brands share ideas that
+                deserve attention.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#articles" class="btn btn-primary">
+                    Explore Articles →
+                </a>
+
+                <button class="btn btn-outline" id="heroSubmit">
+                    Write for POVMAGA
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="glass-card float-card">
+                <span class="mini-label">Published today</span>
+                <strong>+24</strong>
+                <small>fresh stories</small>
+            </div>
+
+            <div class="glass-card main-card">
+
+                <div class="card-top">
+                    <div>
+                        <span class="mini-label">FEATURED STORY</span>
+                    </div>
+
+                    <div class="avatar"></div>
+                </div>
+
+                <div class="fake-image"></div>
+
+                <h3>
+                    How smart creators are building better digital brands
+                </h3>
+
+                <span class="mini-label">
+                    POVMAGA Editorial · 6 min read
+                </span>
+
+            </div>
+
+            <div class="glass-card stats-card">
+
+                <span class="mini-label">Community</span>
+
+                <strong>12K+</strong>
+
+                <small>
+                    readers & contributors
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRUST
+========================= -->
+
+<section class="trust">
+
+    <div class="container">
+
+        <div class="trust-box">
+
+            <span>TECHNOLOGY</span>
+            <span>BUSINESS</span>
+            <span>CREATORS</span>
+            <span>LIFESTYLE</span>
+            <span>MARKETING</span>
+            <span>STARTUPS</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ARTICLES
+========================= -->
+
+<section id="articles">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+                <span class="blog-tag">EDITOR'S PICKS</span>
+                <h2>Latest stories</h2>
+            </div>
+
+            <p>
+                Discover practical insights, fresh perspectives and
+                useful stories from the POVMAGA community.
+            </p>
+
+        </div>
+
+
+        <div class="categories" id="categories">
+
+            <button class="category active" data-category="all">
+                All
+            </button>
+
+            <button class="category" data-category="technology">
+                Technology
+            </button>
+
+            <button class="category" data-category="business">
+                Business
+            </button>
+
+            <button class="category" data-category="lifestyle">
+                Lifestyle
+            </button>
+
+            <button class="category" data-category="marketing">
+                Marketing
+            </button>
+
+        </div>
+
+
+        <div class="blog-grid" id="blogGrid">
+
+            <article class="blog-card" data-category="technology">
+
+                <div class="blog-image"></div>
+
+                <div class="blog-content">
+
+                    <span class="blog-tag">Technology</span>
+
+                    <h3>
+                        The changing way people discover technology online
+                    </h3>
+
+                    <p>
+                        A practical look at digital discovery and the
+                        habits shaping modern audiences.
+                    </p>
+
+                    <div class="blog-meta">
+                        <span>By POVMAGA</span>
+                        <span>5 min read</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog-card" data-category="business">
+
+                <div class="blog-image"></div>
+
+                <div class="blog-content">
+
+                    <span class="blog-tag">Business</span>
+
+                    <h3>
+                        Small ideas that can become strong online brands
+                    </h3>
+
+                    <p>
+                        Learn how focused ideas can create memorable
+                        brands without complicated strategies.
+                    </p>
+
+                    <div class="blog-meta">
+                        <span>By Editorial</span>
+                        <span>7 min read</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog-card" data-category="lifestyle">
+
+                <div class="blog-image"></div>
+
+                <div class="blog-content">
+
+                    <span class="blog-tag">Lifestyle</span>
+
+                    <h3>
+                        Building a healthier relationship with digital media
+                    </h3>
+
+                    <p>
+                        Simple ways to make your online experience more
+                        useful, intentional and enjoyable.
+                    </p>
+
+                    <div class="blog-meta">
+                        <span>By POVMAGA</span>
+                        <span>4 min read</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog-card" data-category="marketing">
+
+                <div class="blog-image"></div>
+
+                <div class="blog-content">
+
+                    <span class="blog-tag">Marketing</span>
+
+                    <h3>
+                        Content strategies that help brands get noticed
+                    </h3>
+
+                    <p>
+                        Explore practical content ideas for building
+                        visibility and earning audience attention.
+                    </p>
+
+                    <div class="blog-meta">
+                        <span>By Editorial</span>
+                        <span>6 min read</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog-card" data-category="technology">
+
+                <div class="blog-image"></div>
+
+                <div class="blog-content">
+
+                    <span class="blog-tag">Technology</span>
+
+                    <h3>
+                        Useful AI tools changing everyday productivity
+                    </h3>
+
+                    <p>
+                        A simple guide to using modern AI tools for
+                        research, writing and everyday work.
+                    </p>
+
+                    <div class="blog-meta">
+                        <span>By POVMAGA</span>
+                        <span>8 min read</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog-card" data-category="business">
+
+                <div class="blog-image"></div>
+
+                <div class="blog-content">
+
+                    <span class="blog-tag">Business</span>
+
+                    <h3>
+                        What makes an online publication worth following?
+                    </h3>
+
+                    <p>
+                        The principles behind useful editorial platforms
+                        and communities people return to.
+                    </p>
+
+                    <div class="blog-meta">
+                        <span>By Editorial</span>
+                        <span>5 min read</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEATURE
+========================= -->
+
+<section class="feature" id="about">
+
+    <div class="container feature-grid">
+
+        <div class="feature-visual">
+
+            <div class="orb"></div>
+
+            <div class="feature-window">
+
+                <div class="window-bar">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+                <div class="window-line"></div>
+                <div class="window-line short"></div>
+                <div class="window-line"></div>
+                <div class="window-line short"></div>
+
+                <br>
+
+                <div class="window-line"></div>
+                <div class="window-line"></div>
+                <div class="window-line short"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature-copy">
+
+            <span class="blog-tag">
+                WHY POVMAGA
+            </span>
+
+            <h2>
+                A home for ideas, stories and ambitious creators.
+            </h2>
+
+            <p>
+                POVMAGA is designed to make publishing simple.
+                Whether you are a writer, marketer, founder or creator,
+                you can share useful content with a growing audience.
+            </p>
+
+            <ul class="feature-list">
+
+                <li>Clean and reader-friendly publishing</li>
+
+                <li>Multiple content categories</li>
+
+                <li>Contributor-friendly platform</li>
+
+                <li>Modern editorial experience</li>
+
+            </ul>
+
+            <button class="btn btn-primary" id="featureSubmit">
+                Submit Your Article →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BENEFITS
+========================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+                <span class="blog-tag">FOR CONTRIBUTORS</span>
+                <h2>Why write with us?</h2>
+            </div>
+
+            <p>
+                Turn your knowledge into useful content and reach readers
+                who care about your topic.
+            </p>
+
+        </div>
+
+
+        <div class="cards-3">
+
+            <div class="info-card">
+
+                <div class="icon">✦</div>
+
+                <h3>Share Your Expertise</h3>
+
+                <p>
+                    Publish useful, original articles and build your
+                    reputation around the subjects you know best.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="icon">◎</div>
+
+                <h3>Reach New Readers</h3>
+
+                <p>
+                    Put your ideas in front of readers exploring
+                    technology, business, lifestyle and more.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="icon">↗</div>
+
+                <h3>Grow Your Presence</h3>
+
+                <p>
+                    Create a strong publishing profile and make your
+                    content easier for audiences to discover.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta" id="contact">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <span class="blog-tag">
+                READY TO PUBLISH?
+            </span>
+
+            <h2>
+                Your next great article<br>
+                belongs on POVMAGA.
+            </h2>
+
+            <p>
+                Have an original idea, useful guide or expert perspective?
+                Send it to our editorial team.
+            </p>
+
+            <button class="btn btn-primary" id="ctaSubmit">
+                Submit Guest Post →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     NEWSLETTER
+========================= -->
+
+<section class="newsletter">
+
+    <div class="container">
+
+        <div class="newsletter-box">
+
+            <div>
+
+                <h3>Get fresh stories.</h3>
+
+                <p>
+                    One useful email. No unnecessary noise.
+                </p>
+
+            </div>
+
+            <form class="newsletter-form" id="newsletterForm">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Your email address"
+                    required
+                >
+
+                <button class="btn btn-primary" type="submit">
+                    Subscribe
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <a href="#" class="logo">
+                    POV<span>MAGA</span>
+                </a>
+
+                <p>
+                    A modern publishing platform for ideas, insights,
+                    stories and ambitious creators.
+                </p>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h4>Explore</h4>
+
+                <a href="#articles">Articles</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About Us</a>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h4>Contributors</h4>
+
+                <a href="#" id="footerSubmit">Submit Guest Post</a>
+                <a href="#">Writing Guidelines</a>
+                <a href="#">Editorial Policy</a>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h4>Contact</h4>
+
+                <a href="mailto:hello@povmaga.com">
+                    hello@povmaga.com
+                </a>
+
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            <span>
+                © 2026 POVMAGA. All rights reserved.
+            </span>
+
+            <span>
+                Built for better ideas.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     SUBMIT MODAL
+========================= -->
+
+<div class="modal" id="submitModal">
+
+    <div class="modal-box">
+
+        <button class="modal-close" id="closeModal">
+            ×
+        </button>
+
+        <h2>Submit Your Guest Post</h2>
+
+        <p>
+            Tell us about your article and our editorial team can review
+            your submission.
+        </p>
+
+        <form id="submitForm">
+
+            <div class="form-group">
+
+                <label>Your Name</label>
+
+                <input
+                    type="text"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Article Category</label>
+
+                <select required>
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option>Technology</option>
+                    <option>Business</option>
+                    <option>Lifestyle</option>
+                    <option>Marketing</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Article Topic</label>
+
+                <input
+                    type="text"
+                    placeholder="Your article title or topic"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Message</label>
+
+                <textarea
+                    placeholder="Tell us briefly about your article..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button class="btn btn-primary" type="submit">
+                Send Submission →
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+
+    navLinks.classList.toggle("open");
+
+});
+
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.classList.remove("open");
+
+    });
+
+});
+
+
+/* =========================
+   DARK / LIGHT MODE
+========================= */
+
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("light");
+
+    if(document.body.classList.contains("light")){
+
+        themeBtn.textContent = "☾";
+
+    }else{
+
+        themeBtn.textContent = "☀";
+
+    }
+
+});
+
+
+/* =========================
+   CATEGORY FILTER
+========================= */
+
+const categoryButtons =
+document.querySelectorAll(".category");
+
+const blogCards =
+document.querySelectorAll(".blog-card");
+
+categoryButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        categoryButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const selected =
+        button.getAttribute("data-category");
+
+        blogCards.forEach(card => {
+
+            const category =
+            card.getAttribute("data-category");
+
+            if(
+                selected === "all" ||
+                category === selected
+            ){
+
+                card.style.display = "block";
+
+            }else{
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+});
+
+
+/* =========================
+   SUBMIT MODAL
+========================= */
+
+const modal =
+document.getElementById("submitModal");
+
+const openModal =
+document.getElementById("openModal");
+
+const heroSubmit =
+document.getElementById("heroSubmit");
+
+const featureSubmit =
+document.getElementById("featureSubmit");
+
+const ctaSubmit =
+document.getElementById("ctaSubmit");
+
+const footerSubmit =
+document.getElementById("footerSubmit");
+
+const closeModal =
+document.getElementById("closeModal");
+
+
+function showModal(){
+
+    modal.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+function hideModal(){
+
+    modal.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+}
+
+
+openModal.addEventListener("click", showModal);
+
+heroSubmit.addEventListener("click", showModal);
+
+featureSubmit.addEventListener("click", showModal);
+
+ctaSubmit.addEventListener("click", showModal);
+
+footerSubmit.addEventListener("click", (event) => {
+
+    event.preventDefault();
+
+    showModal();
+
+});
+
+closeModal.addEventListener("click", hideModal);
+
+
+modal.addEventListener("click", (event) => {
+
+    if(event.target === modal){
+
+        hideModal();
+
+    }
+
+});
+
+
+/* =========================
+   SUBMISSION FORM
+========================= */
+
+const submitForm =
+document.getElementById("submitForm");
+
+submitForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    alert(
+        "Thanks! Your guest post submission has been received."
+    );
+
+    submitForm.reset();
+
+    hideModal();
+
+});
+
+
+/* =========================
+   NEWSLETTER
+========================= */
+
+const newsletterForm =
+document.getElementById("newsletterForm");
+
+newsletterForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    const email =
+    document.getElementById("email").value;
+
+    if(email){
+
+        alert(
+            "Thanks for subscribing to POVMAGA!"
+        );
+
+        newsletterForm.reset();
+
+    }
+
+});
+
+
+/* =========================
+   ESCAPE MODAL
+========================= */
+
+document.addEventListener("keydown", (event) => {
+
+    if(event.key === "Escape"){
+
+        hideModal();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
